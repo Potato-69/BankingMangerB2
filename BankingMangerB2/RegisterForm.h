@@ -572,7 +572,7 @@ namespace BankingMangerB2 {
 		std::string phoneNumber = context.marshal_as<std::string>(textBox5->Text);
 
 		// Find the correct position to insert in a sorted order
-		int index = userList.getSize();
+		// int index = userList.getSize();
 
 		//  unique ID mechanism 
 		std::string userId = "ID_" + std::to_string(static_cast<long long>(time(0)));
@@ -600,7 +600,7 @@ namespace BankingMangerB2 {
 				return;
 			}
 
-			userList.insert(index, newUser_A);
+			userList.append(newUser_A);
 		}
 
 		else if (checkBox3->Checked == true)
@@ -622,7 +622,7 @@ namespace BankingMangerB2 {
 				return;
 			}
 
-			userList.insert(index, newUser_A);
+			userList.append(newUser_A);
 		}
 		else
 		{

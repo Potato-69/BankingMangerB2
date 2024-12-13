@@ -255,9 +255,46 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 	std::string username = context.marshal_as<std::string>(textBox1->Text);
 	std::string userpassword = context.marshal_as<std::string>(textBox2->Text);
 
-	for (int i = 0; i < userList.getSize(); i++) {
-		if (username == userList.getElementAt(i).getUsername() && userpassword == userList.getElementAt(i).getPassword()) {
-			UserIN = true;
+	auto currnetUser = userList.head;
+
+		while (currnetUser != nullptr)
+		{
+			if (username == currnetUser->data.getUsername() && userpassword == currnetUser->data.getPassword())
+			{
+				UserIN = true;
+				break;
+			}
+			
+			currnetUser = currnetUser->next;
+		}
+		
+		if (UserIN)
+		{
+			this->Hide();
+			Home^ home = gcnew Home();
+
+			home->username = textBox1->Text;
+			home->password = textBox2->Text;
+
+			home->Owner = this;
+			home->ShowDialog();
+
+			if (home->boolValue)
+			{
+				this->Show();
+				UserIN = false;
+				textBox1->Clear();
+				textBox2->Clear();
+			}
+		}
+		
+		
+
+	
+
+	/*for (int i = 0; i < userList.getSize(); i++) {
+		//if (username == userList.getElementAt(i).getUsername() && userpassword == userList.getElementAt(i).getPassword()) {
+			//UserIN = true;
 			this->Hide();
 			Home^ home = gcnew Home();
 			home->Owner = this;
@@ -266,16 +303,17 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 			if (home->boolValue)
 			{
 				this->Show();
-				textBox1->Text = "";
-				textBox2->Text = "";
+				textBox1->Clear();
+				textBox2->Clear();
 				UserIN = false;
 			}
 		}
 		else
 		{
 			MessageBox::Show("This user doesn't exist", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
 		}
-	}
+	}*/
 
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {

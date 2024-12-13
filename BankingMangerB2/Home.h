@@ -28,6 +28,8 @@ namespace BankingMangerB2 {
 	public ref class Home : public System::Windows::Forms::Form
 	{
 	public:
+		System::String^ username;
+		System::String^ password;
 		int UserIndex;
 		Home(void)
 		{
@@ -287,7 +289,10 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 	this->Hide();
 	DisplayInfo^ ACCinfo = gcnew DisplayInfo();
 	ACCinfo->Owner = this;
-	ACCinfo->DPinfo();
+
+	ACCinfo->username = username;
+	ACCinfo->password = password;
+	
 	ACCinfo->ShowDialog();
 	ACCinfo->UserIndex = UserIndex;
 

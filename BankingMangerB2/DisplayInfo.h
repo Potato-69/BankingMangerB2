@@ -89,6 +89,14 @@ namespace BankingMangerB2 {
 	private: System::Windows::Forms::Label^ label20;
 
 	public:
+		System::String^ username;
+	private: System::Windows::Forms::Label^ label12;
+	public:
+	private: System::Windows::Forms::TextBox^ textBox4;
+	private: System::Windows::Forms::Label^ label6;
+	private: System::Windows::Forms::TextBox^ textBox3;
+		   System::String^ password;
+
 		void DPinfo()
 		{
 			button2->PerformClick();
@@ -162,6 +170,10 @@ namespace BankingMangerB2 {
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->panel5 = (gcnew System::Windows::Forms::Panel());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->label12 = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			this->panel6->SuspendLayout();
@@ -500,9 +512,9 @@ namespace BankingMangerB2 {
 				static_cast<System::Byte>(0)));
 			this->label22->Location = System::Drawing::Point(3, 5);
 			this->label22->Name = L"label22";
-			this->label22->Size = System::Drawing::Size(213, 38);
+			this->label22->Size = System::Drawing::Size(253, 38);
 			this->label22->TabIndex = 1;
-			this->label22->Text = L"Transaction info";
+			this->label22->Text = L"Transaction History";
 			// 
 			// panel3
 			// 
@@ -552,6 +564,10 @@ namespace BankingMangerB2 {
 			// 
 			this->panel5->BackColor = System::Drawing::Color::Transparent;
 			this->panel5->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->panel5->Controls->Add(this->label12);
+			this->panel5->Controls->Add(this->textBox4);
+			this->panel5->Controls->Add(this->label6);
+			this->panel5->Controls->Add(this->textBox3);
 			this->panel5->Controls->Add(this->button5);
 			this->panel5->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -559,6 +575,46 @@ namespace BankingMangerB2 {
 			this->panel5->Name = L"panel5";
 			this->panel5->Size = System::Drawing::Size(480, 304);
 			this->panel5->TabIndex = 9;
+			// 
+			// textBox3
+			// 
+			this->textBox3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBox3->Location = System::Drawing::Point(3, 31);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->Size = System::Drawing::Size(470, 34);
+			this->textBox3->TabIndex = 1;
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label6->Location = System::Drawing::Point(3, 0);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(237, 28);
+			this->label6->TabIndex = 2;
+			this->label6->Text = L"Target\'s Account Number:";
+			// 
+			// textBox4
+			// 
+			this->textBox4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBox4->Location = System::Drawing::Point(3, 99);
+			this->textBox4->Name = L"textBox4";
+			this->textBox4->Size = System::Drawing::Size(470, 34);
+			this->textBox4->TabIndex = 1;
+			// 
+			// label12
+			// 
+			this->label12->AutoSize = true;
+			this->label12->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label12->Location = System::Drawing::Point(3, 68);
+			this->label12->Name = L"label12";
+			this->label12->Size = System::Drawing::Size(87, 28);
+			this->label12->TabIndex = 2;
+			this->label12->Text = L"Amount:";
 			// 
 			// DisplayInfo
 			// 
@@ -589,6 +645,7 @@ namespace BankingMangerB2 {
 			this->panel4->ResumeLayout(false);
 			this->panel4->PerformLayout();
 			this->panel5->ResumeLayout(false);
+			this->panel5->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -598,33 +655,48 @@ namespace BankingMangerB2 {
 		this->boolValue = true;
 	}
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-	User user = userList.getElementAt(UserIndex);
+	msclr::interop::marshal_context context;
 
-	std::string Username_T = user.getUsername();
-	System::String^ Username = gcnew System::String(Username_T.c_str());
-	label1->Text = Username;
+	std::string Username = context.marshal_as<std::string>(username);
+	std::string Userpassword = context.marshal_as<std::string>(password);
 
-	std::string Fname_T = user.getFname();
+	auto currnetUser = userList.head;
+
+	while (currnetUser != nullptr)
+	{
+		if (Username == currnetUser->data.getUsername() && Userpassword == currnetUser->data.getPassword())
+		{
+			break;
+		}
+
+		currnetUser = currnetUser->next;
+	}
+
+	std::string Username_T = currnetUser->data.getUsername();
+	System::String^ UsernameN = gcnew System::String(Username_T.c_str());
+	label1->Text = UsernameN;
+
+	std::string Fname_T = currnetUser->data.getFname();
 	System::String^ Fname = gcnew System::String(Fname_T.c_str());
 	label8->Text = Fname;
 
-	std::string Lname_T = user.getLname();
+	std::string Lname_T = currnetUser->data.getLname();
 	System::String^ Lname = gcnew System::String(Lname_T.c_str());
 	label9->Text = Lname;
 
-	std::string PhoneNum_T = user.getPhonenum();
+	std::string PhoneNum_T = currnetUser->data.getPhonenum();
 	System::String^ PhoneNum = gcnew System::String(PhoneNum_T.c_str());
 	label10->Text = PhoneNum;
 
-	std::string Address_T = user.getAddress();
+	std::string Address_T = currnetUser->data.getAddress();
 	System::String^ Address = gcnew System::String(Address_T.c_str());
 	label11->Text = Address;
 
-	std::string Email_T = user.getEmail();
+	std::string Email_T = currnetUser->data.getEmail();
 	System::String^ Email = gcnew System::String(Email_T.c_str());
 	label13->Text = Email;
 
-	BankAccount UBA = user.getBankAccount();
+	BankAccount UBA = currnetUser->data.getBankAccount();
 
 	std::string ACCnum_T = UBA.getAccountNumber();
 	System::String^ ACCnum = gcnew System::String(ACCnum_T.c_str());
@@ -636,22 +708,29 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 
 	int trans_times = UBA.transactions.getSize();
 
-	std::string transactions_T = UBA.serialize();
+	std::string transactions_T = currnetUser->data.getBankAccount().serialize();
 	System::String^ transactions = gcnew System::String(transactions_T.c_str());
 	richTextBox1->Text = transactions;
 }
 private: System::Void panel1_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-	User user = userList.getElementAt(UserIndex);
-	double balance = user.getBankAccount().balance;
+	msclr::interop::marshal_context context;
 
-	User Nuser = User(user);
-	
-	BankAccount UBA = user.getBankAccount();
-	BankAccount NUBA = BankAccount(UBA);
+	std::string Username = context.marshal_as<std::string>(username);
+	std::string Userpassword = context.marshal_as<std::string>(password);
 
-	
+	auto currnetUser = userList.head;
+
+	while (currnetUser != nullptr)
+	{
+		if (Username == currnetUser->data.getUsername() && Userpassword == currnetUser->data.getPassword())
+		{
+			break;
+		}
+
+		currnetUser = currnetUser->next;
+	}
 
 	double amount;
 
@@ -661,25 +740,33 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 
 		if (System::Double::TryParse(amount_T, amount))
 		{
-			double newBalance = balance + amount;
+			/*double newBalance = balance + amount;
 			NUBA.balance = newBalance;
-			Nuser.setBankAccount(NUBA);
+			Nuser.setBankAccount(NUBA);*/
+
+			currnetUser->data.getBankAccount().performTransaction("deposit", amount);
 		}
 
-	userList.replaceElementAt(UserIndex, Nuser);
 	textBox1->Clear();
 	button2->PerformClick();
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-	User user = userList.getElementAt(UserIndex);
-	double balance = user.getBankAccount().balance;
+	msclr::interop::marshal_context context;
 
-	User Nuser = User(user);
+	std::string Username = context.marshal_as<std::string>(username);
+	std::string Userpassword = context.marshal_as<std::string>(password);
 
-	BankAccount UBA = user.getBankAccount();
-	BankAccount NUBA = BankAccount(UBA);
+	auto currnetUser = userList.head;
 
+	while (currnetUser != nullptr)
+	{
+		if (Username == currnetUser->data.getUsername() && Userpassword == currnetUser->data.getPassword())
+		{
+			break;
+		}
 
+		currnetUser = currnetUser->next;
+	}
 
 	double amount;
 
@@ -688,22 +775,66 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 
 	if (System::Double::TryParse(amount_T, amount))
 	{
-		if (balance < amount)
+		if (currnetUser->data.getBankAccount().balance < amount)
 		{
 			MessageBox::Show("Insufficient funds for withdrawal.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		}
 
-		double newBalance = balance - amount;
-		NUBA.balance = newBalance;
-		Nuser.setBankAccount(NUBA);
+		currnetUser->data.getBankAccount().performTransaction("withdraw", amount);
 	}
 
-	userList.replaceElementAt(UserIndex, Nuser);
 	textBox2->Clear();
 	button2->PerformClick();
 }
 private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+	msclr::interop::marshal_context context;
+
+	std::string targetACCnum = context.marshal_as<std::string>(textBox3->Text);
+
+	std::string Username = context.marshal_as<std::string>(username);
+	std::string Userpassword = context.marshal_as<std::string>(password);
+
+	auto currnetUser = userList.head;
+
+	auto targetUser = userList.head;
+
+	while (currnetUser != nullptr)
+	{
+		if (Username == currnetUser->data.getUsername() && Userpassword == currnetUser->data.getPassword())
+		{
+			break;
+		}
+
+		currnetUser = currnetUser->next;
+	}
+
+	while (targetUser != nullptr)
+	{
+		if (targetACCnum == targetUser->data.getBankAccount().getAccountNumber())
+		{
+			break;
+		}
+
+		targetUser = targetUser->next;
+	}
+
+	double amount;
+
+	System::String^ amount_T = textBox4->Text;
+	System::Double::TryParse(amount_T, amount);
+
+	if (System::Double::TryParse(amount_T, amount))
+	{
+		if (currnetUser->data.getBankAccount().balance < amount)
+		{
+			MessageBox::Show("Insufficient funds for the transfer.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			return;
+		}
+
+		currnetUser->data.getBankAccount().performTransaction("withdraw", amount);
+		targetUser->data.getBankAccount().performTransaction("deposit", amount);
+	}
 }
 };
 }
