@@ -23,21 +23,8 @@ class User
     User(const UserRole& role, const string& fname,
         const string& lname, const string& email, string Username,
         const string& password, const string& phonenum, const string& address,
-        const BankAccount& bankAccount);
-    User(const string& username, const string& password,
-        const string& phonenum, const string& address,
-        const BankAccount& bankAccount, const UserRole& role);
+        const BankAccount& bankAccount, const string& bankID);
 
-    User(UserRole role, const string& fname, const string& lname, const string& email,
-        const string& password, const string& phoneNum, double initBalance, string Username);
-
-    User() : Fname(""), Lname(""), Email(""), Password(""), phonenum("") {
-        //       type = userType;
-        //       uID = generateUserID();
-
-
-
-    }
     User(const User& other);
 
 
@@ -46,7 +33,7 @@ class User
 protected: std::string userid;
 
 public:
-    LinkedList<Transaction> transactions;
+    
 
     const string& getUsername() const;
     const string& getPassword() const;
@@ -56,6 +43,7 @@ public:
     const string& getLname() const;
     const string& getEmail() const;
     const string& getUserID() const;
+    string& getBankID();
 
     BankAccount& getBankAccount();
     UserRole getRole() const;
@@ -65,10 +53,13 @@ public:
     void setPassword(const string& newPassword);
     void setPhonenum(const string& newPhonenum);
     void setAddress(const string& newAddress);
+    void setBankID(string& newBankID);
     void setBankAccount(const BankAccount& newBankAccount);
+    void setFname(const string& newfname);
+    void setLname(const string& newlname);
+    void setEmail(const string& newemail);
     void setRole(UserRole newRole);
 
-    void addTransaction(const string& transactionType, double amount);
 
     // Helper function to serialize BankAccount
     std::string serializeBankAccount() const;
@@ -81,7 +72,7 @@ public:
 
     // Deserialize function
     // Old Mothed
-    static User deserialize(const std::string& str);
+    // static User deserialize(const std::string& str);
     string generateUserID();
 
 protected:
@@ -90,6 +81,7 @@ protected:
     string phonenum;
     string address;
     string uID;
+    string BankID;
     string Email;
     BankAccount bankAccount;
     string Fname;

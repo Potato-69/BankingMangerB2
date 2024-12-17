@@ -30,6 +30,7 @@ const std::string& Transaction::getDate() const {
     return date;
 }
 
+// Deserialization method implementation
 // Old Method
 Transaction Transaction::deserialize(const std::string& str) {
     std::istringstream iss(str);

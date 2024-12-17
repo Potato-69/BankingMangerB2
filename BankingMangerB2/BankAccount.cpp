@@ -57,6 +57,18 @@ void BankAccount::performTransaction(std::string transactionType, double amount)
             return;
         }
     }
+    else if (transactionType == "transfer")
+    {
+        balance += amount;
+        Transaction currentTransaction = Transaction(transactionType, amount);
+        transactions.append(currentTransaction);
+    }
+    else if (transactionType == "transfered")
+    {
+        balance -= amount;
+        Transaction currentTransaction = Transaction(transactionType, amount);
+        transactions.append(currentTransaction);
+    }
     else if (transactionType == "inquiry") {
         Transaction currentTransaction = Transaction(transactionType, 0);
         transactions.append(currentTransaction);

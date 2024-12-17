@@ -33,7 +33,20 @@ namespace BankingMangerB2 {
 	public ref class DisplayInfo : public System::Windows::Forms::Form
 	{
 	public:
-		int UserIndex;
+		bool boolValue;
+		property bool BoolValue {
+			bool get() {
+				return boolValue;
+			}
+			void set(bool value) {
+				boolValue = value;
+			}
+		}
+		System::String^ username;
+		System::String^ password;
+	private: System::Windows::Forms::Label^ label19;
+	public:
+	
 		DisplayInfo(void)
 		{
 			InitializeComponent();
@@ -41,6 +54,7 @@ namespace BankingMangerB2 {
 			//TODO: Add the constructor code here
 			//
 		}
+	private: System::Windows::Forms::Label^ label16;
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Panel^ panel1;
@@ -89,28 +103,11 @@ namespace BankingMangerB2 {
 	private: System::Windows::Forms::Label^ label20;
 
 	public:
-		System::String^ username;
 	private: System::Windows::Forms::Label^ label12;
 	public:
 	private: System::Windows::Forms::TextBox^ textBox4;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::TextBox^ textBox3;
-		   System::String^ password;
-
-		void DPinfo()
-		{
-			button2->PerformClick();
-		}
-		
-		bool boolValue;
-		property bool BoolValue {
-			bool get() {
-				return boolValue;
-			}
-			void set(bool value) {
-				boolValue = value;
-			}
-		}
 
 	protected:
 		/// <summary>
@@ -170,10 +167,12 @@ namespace BankingMangerB2 {
 			this->panel4 = (gcnew System::Windows::Forms::Panel());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->panel5 = (gcnew System::Windows::Forms::Panel());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->label6 = (gcnew System::Windows::Forms::Label());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->label16 = (gcnew System::Windows::Forms::Label());
+			this->label19 = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
 			this->panel2->SuspendLayout();
 			this->panel6->SuspendLayout();
@@ -218,6 +217,7 @@ namespace BankingMangerB2 {
 			// 
 			this->panel1->BackColor = System::Drawing::Color::Transparent;
 			this->panel1->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->panel1->Controls->Add(this->label19);
 			this->panel1->Controls->Add(this->label13);
 			this->panel1->Controls->Add(this->button2);
 			this->panel1->Controls->Add(this->label11);
@@ -226,6 +226,7 @@ namespace BankingMangerB2 {
 			this->panel1->Controls->Add(this->label18);
 			this->panel1->Controls->Add(this->label17);
 			this->panel1->Controls->Add(this->label8);
+			this->panel1->Controls->Add(this->label16);
 			this->panel1->Controls->Add(this->label7);
 			this->panel1->Controls->Add(this->label5);
 			this->panel1->Controls->Add(this->label4);
@@ -247,7 +248,7 @@ namespace BankingMangerB2 {
 			this->label13->AutoSize = true;
 			this->label13->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label13->Location = System::Drawing::Point(77, 179);
+			this->label13->Location = System::Drawing::Point(73, 164);
 			this->label13->Name = L"label13";
 			this->label13->Size = System::Drawing::Size(44, 28);
 			this->label13->TabIndex = 2;
@@ -258,7 +259,7 @@ namespace BankingMangerB2 {
 			this->label11->AutoSize = true;
 			this->label11->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label11->Location = System::Drawing::Point(99, 142);
+			this->label11->Location = System::Drawing::Point(96, 136);
 			this->label11->Name = L"label11";
 			this->label11->Size = System::Drawing::Size(44, 28);
 			this->label11->TabIndex = 2;
@@ -269,7 +270,7 @@ namespace BankingMangerB2 {
 			this->label10->AutoSize = true;
 			this->label10->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label10->Location = System::Drawing::Point(160, 108);
+			this->label10->Location = System::Drawing::Point(158, 108);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(44, 28);
 			this->label10->TabIndex = 2;
@@ -280,7 +281,7 @@ namespace BankingMangerB2 {
 			this->label9->AutoSize = true;
 			this->label9->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label9->Location = System::Drawing::Point(118, 77);
+			this->label9->Location = System::Drawing::Point(117, 80);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(44, 28);
 			this->label9->TabIndex = 2;
@@ -291,7 +292,7 @@ namespace BankingMangerB2 {
 			this->label18->AutoSize = true;
 			this->label18->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label18->Location = System::Drawing::Point(690, 70);
+			this->label18->Location = System::Drawing::Point(689, 80);
 			this->label18->Name = L"label18";
 			this->label18->Size = System::Drawing::Size(44, 28);
 			this->label18->TabIndex = 2;
@@ -302,7 +303,7 @@ namespace BankingMangerB2 {
 			this->label17->AutoSize = true;
 			this->label17->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label17->Location = System::Drawing::Point(607, 42);
+			this->label17->Location = System::Drawing::Point(606, 52);
 			this->label17->Name = L"label17";
 			this->label17->Size = System::Drawing::Size(44, 28);
 			this->label17->TabIndex = 2;
@@ -313,7 +314,7 @@ namespace BankingMangerB2 {
 			this->label8->AutoSize = true;
 			this->label8->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label8->Location = System::Drawing::Point(120, 42);
+			this->label8->Location = System::Drawing::Point(119, 52);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(44, 28);
 			this->label8->TabIndex = 2;
@@ -324,7 +325,7 @@ namespace BankingMangerB2 {
 			this->label7->AutoSize = true;
 			this->label7->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label7->Location = System::Drawing::Point(8, 179);
+			this->label7->Location = System::Drawing::Point(4, 164);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(63, 28);
 			this->label7->TabIndex = 1;
@@ -335,7 +336,7 @@ namespace BankingMangerB2 {
 			this->label5->AutoSize = true;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label5->Location = System::Drawing::Point(7, 142);
+			this->label5->Location = System::Drawing::Point(4, 136);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(86, 28);
 			this->label5->TabIndex = 1;
@@ -346,7 +347,7 @@ namespace BankingMangerB2 {
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->Location = System::Drawing::Point(6, 108);
+			this->label4->Location = System::Drawing::Point(4, 108);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(148, 28);
 			this->label4->TabIndex = 1;
@@ -357,7 +358,7 @@ namespace BankingMangerB2 {
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->Location = System::Drawing::Point(5, 77);
+			this->label3->Location = System::Drawing::Point(4, 80);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(107, 28);
 			this->label3->TabIndex = 1;
@@ -368,7 +369,7 @@ namespace BankingMangerB2 {
 			this->label15->AutoSize = true;
 			this->label15->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label15->Location = System::Drawing::Point(519, 70);
+			this->label15->Location = System::Drawing::Point(518, 80);
 			this->label15->Name = L"label15";
 			this->label15->Size = System::Drawing::Size(165, 28);
 			this->label15->TabIndex = 1;
@@ -379,7 +380,7 @@ namespace BankingMangerB2 {
 			this->label14->AutoSize = true;
 			this->label14->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label14->Location = System::Drawing::Point(519, 42);
+			this->label14->Location = System::Drawing::Point(518, 52);
 			this->label14->Name = L"label14";
 			this->label14->Size = System::Drawing::Size(82, 28);
 			this->label14->TabIndex = 1;
@@ -390,7 +391,7 @@ namespace BankingMangerB2 {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(4, 42);
+			this->label2->Location = System::Drawing::Point(3, 52);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(110, 28);
 			this->label2->TabIndex = 1;
@@ -462,7 +463,7 @@ namespace BankingMangerB2 {
 			this->button5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
 			this->button5->Font = (gcnew System::Drawing::Font(L"Segoe UI", 13.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button5->Location = System::Drawing::Point(3, 245);
+			this->button5->Location = System::Drawing::Point(3, 250);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(470, 52);
 			this->button5->TabIndex = 0;
@@ -573,17 +574,28 @@ namespace BankingMangerB2 {
 				static_cast<System::Byte>(0)));
 			this->panel5->Location = System::Drawing::Point(13, 354);
 			this->panel5->Name = L"panel5";
-			this->panel5->Size = System::Drawing::Size(480, 304);
+			this->panel5->Size = System::Drawing::Size(480, 309);
 			this->panel5->TabIndex = 9;
 			// 
-			// textBox3
+			// label12
 			// 
-			this->textBox3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label12->AutoSize = true;
+			this->label12->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->textBox3->Location = System::Drawing::Point(3, 31);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(470, 34);
-			this->textBox3->TabIndex = 1;
+			this->label12->Location = System::Drawing::Point(3, 68);
+			this->label12->Name = L"label12";
+			this->label12->Size = System::Drawing::Size(87, 28);
+			this->label12->TabIndex = 2;
+			this->label12->Text = L"Amount:";
+			// 
+			// textBox4
+			// 
+			this->textBox4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBox4->Location = System::Drawing::Point(3, 99);
+			this->textBox4->Name = L"textBox4";
+			this->textBox4->Size = System::Drawing::Size(470, 34);
+			this->textBox4->TabIndex = 1;
 			// 
 			// label6
 			// 
@@ -596,25 +608,36 @@ namespace BankingMangerB2 {
 			this->label6->TabIndex = 2;
 			this->label6->Text = L"Target\'s Account Number:";
 			// 
-			// textBox4
+			// textBox3
 			// 
-			this->textBox4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->textBox3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->textBox4->Location = System::Drawing::Point(3, 99);
-			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(470, 34);
-			this->textBox4->TabIndex = 1;
+			this->textBox3->Location = System::Drawing::Point(3, 31);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->Size = System::Drawing::Size(470, 34);
+			this->textBox3->TabIndex = 1;
 			// 
-			// label12
+			// label16
 			// 
-			this->label12->AutoSize = true;
-			this->label12->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->label16->AutoSize = true;
+			this->label16->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label12->Location = System::Drawing::Point(3, 68);
-			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(87, 28);
-			this->label12->TabIndex = 2;
-			this->label12->Text = L"Amount:";
+			this->label16->Location = System::Drawing::Point(4, 192);
+			this->label16->Name = L"label16";
+			this->label16->Size = System::Drawing::Size(90, 28);
+			this->label16->TabIndex = 1;
+			this->label16->Text = L"User BID:";
+			// 
+			// label19
+			// 
+			this->label19->AutoSize = true;
+			this->label19->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label19->Location = System::Drawing::Point(100, 192);
+			this->label19->Name = L"label19";
+			this->label19->Size = System::Drawing::Size(44, 28);
+			this->label19->TabIndex = 2;
+			this->label19->Text = L"null";
 			// 
 			// DisplayInfo
 			// 
@@ -696,17 +719,17 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	System::String^ Email = gcnew System::String(Email_T.c_str());
 	label13->Text = Email;
 
-	BankAccount UBA = currnetUser->data.getBankAccount();
+	std::string UserID_T = currnetUser->data.getBankID();
+	System::String^ UserID = gcnew System::String(UserID_T.c_str());
+	label19->Text = UserID;
 
-	std::string ACCnum_T = UBA.getAccountNumber();
+	std::string ACCnum_T = currnetUser->data.getBankAccount().getAccountNumber();
 	System::String^ ACCnum = gcnew System::String(ACCnum_T.c_str());
 	label18->Text = ACCnum;
 
-	double balance = UBA.getBalance();
+	double balance = currnetUser->data.getBankAccount().getBalance();
 
 	label17->Text = balance.ToString();
-
-	int trans_times = UBA.transactions.getSize();
 
 	std::string transactions_T = currnetUser->data.getBankAccount().serialize();
 	System::String^ transactions = gcnew System::String(transactions_T.c_str());
@@ -740,10 +763,6 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 
 		if (System::Double::TryParse(amount_T, amount))
 		{
-			/*double newBalance = balance + amount;
-			NUBA.balance = newBalance;
-			Nuser.setBankAccount(NUBA);*/
-
 			currnetUser->data.getBankAccount().performTransaction("deposit", amount);
 		}
 
@@ -832,9 +851,13 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 			return;
 		}
 
-		currnetUser->data.getBankAccount().performTransaction("withdraw", amount);
-		targetUser->data.getBankAccount().performTransaction("deposit", amount);
+		currnetUser->data.getBankAccount().performTransaction("transfered", amount);
+		targetUser->data.getBankAccount().performTransaction("transfer", amount);
 	}
+
+	textBox4->Clear();
+	textBox3->Clear();
+	button2->PerformClick();
 }
 };
 }

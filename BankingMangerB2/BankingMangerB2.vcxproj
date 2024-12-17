@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BankAccount.cpp" />
+    <ClCompile Include="ChangeInfo.cpp" />
     <ClCompile Include="deposit.cpp" />
     <ClCompile Include="DisplayInfo.cpp" />
     <ClCompile Include="Home.cpp" />
@@ -134,12 +135,16 @@
     <ClCompile Include="List.cpp" />
     <ClCompile Include="ManagedUser.cpp" />
     <ClCompile Include="RegisterForm.cpp" />
+    <ClCompile Include="SearchU.cpp" />
     <ClCompile Include="SignIn.cpp" />
     <ClCompile Include="Transaction.cpp" />
     <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BankAccount.h" />
+    <ClInclude Include="ChangeInfo.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="deposit.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -154,6 +159,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SearchU.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="SignIn.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -161,6 +169,9 @@
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ChangeInfo.resx">
+      <DependentUpon>ChangeInfo.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="deposit.resx">
       <DependentUpon>deposit.h</DependentUpon>
     </EmbeddedResource>
@@ -172,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchU.resx">
+      <DependentUpon>SearchU.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SignIn.resx">
       <DependentUpon>SignIn.h</DependentUpon>

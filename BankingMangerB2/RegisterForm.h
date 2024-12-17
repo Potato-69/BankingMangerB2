@@ -541,7 +541,7 @@ namespace BankingMangerB2 {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"RegisterForm";
-			this->Text = L"RegisterForm";
+			this->Text = L" ";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -576,6 +576,8 @@ namespace BankingMangerB2 {
 
 		//  unique ID mechanism 
 		std::string userId = "ID_" + std::to_string(static_cast<long long>(time(0)));
+		System::String^ UserID = gcnew System::String(userId.c_str());
+
 
 		double parsedBalance;
 
@@ -590,10 +592,9 @@ namespace BankingMangerB2 {
 			}
 			string account = "saff";
 			BankAccount account2(account, parsedBalance);
-			User newUser_A(User::UserRole(User::ADMIN), userfname, userlname, useremail, username,
-				userpassword, phoneNumber, useraddress, account2);
-			newUser_A.setUserId(userId);
-
+			User newUser_A (User::UserRole(User::ADMIN), userfname, userlname, useremail, username,
+				userpassword, phoneNumber, useraddress, account2, userId);
+			
 			// the fields are not empty
 			if (String::IsNullOrEmpty(textBox3->Text) || String::IsNullOrEmpty(textBox4->Text)) {
 				MessageBox::Show("Please enter both username and password.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -613,22 +614,22 @@ namespace BankingMangerB2 {
 			string account = "customer";
 			BankAccount account2(account, parsedBalance);
 			User newUser_A(User::UserRole(User::CUSTOMER), userfname, userlname, useremail, username,
-				userpassword, phoneNumber, useraddress, account2);
-			newUser_A.setUserId(userId);
-
+				userpassword, phoneNumber, useraddress, account2, userId);
+			
 			// the fields are not empty
 			if (String::IsNullOrEmpty(textBox3->Text) || String::IsNullOrEmpty(textBox4->Text)) {
 				MessageBox::Show("Please enter both username and password.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 			}
 
-			userList.append(newUser_A);
 		}
 		else
 		{
 			MessageBox::Show("Please Check if u want a staff account or a customer.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		}
+
+		
 
 		this->Close();
 		boolValue = true;

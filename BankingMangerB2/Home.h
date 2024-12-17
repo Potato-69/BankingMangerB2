@@ -12,6 +12,7 @@
 #include "Transaction.h"
 #include "RegisterForm.h"
 #include "DisplayInfo.h"
+#include "SearchU.h"
 
 namespace BankingMangerB2 {
 
@@ -30,10 +31,23 @@ namespace BankingMangerB2 {
 	public:
 		System::String^ username;
 		System::String^ password;
+		System::String^ username2;
+		System::String^ password2;
+	private: System::Windows::Forms::Panel^ panel2;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Panel^ panel4;
+	private: System::Windows::Forms::TextBox^ textBox2;
+	private: System::Windows::Forms::Panel^ panel3;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::Button^ button5;
+	public:
 		int UserIndex;
 		Home(void)
 		{
 			InitializeComponent();
+			
+			panel2->Hide();
 			//
 			//TODO: Add the constructor code here
 			//
@@ -98,7 +112,16 @@ namespace BankingMangerB2 {
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->panel2 = (gcnew System::Windows::Forms::Panel());
+			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->panel4 = (gcnew System::Windows::Forms::Panel());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->panel3 = (gcnew System::Windows::Forms::Panel());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel1->SuspendLayout();
+			this->panel2->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// button1
@@ -155,6 +178,7 @@ namespace BankingMangerB2 {
 			this->button6->TabIndex = 3;
 			this->button6->Text = L"Change Account info";
 			this->button6->UseVisualStyleBackColor = false;
+			this->button6->Click += gcnew System::EventHandler(this, &Home::button6_Click);
 			// 
 			// button4
 			// 
@@ -186,6 +210,7 @@ namespace BankingMangerB2 {
 			this->button3->TabIndex = 3;
 			this->button3->Text = L"Search for an Account";
 			this->button3->UseVisualStyleBackColor = false;
+			this->button3->Click += gcnew System::EventHandler(this, &Home::button3_Click);
 			// 
 			// button7
 			// 
@@ -219,12 +244,111 @@ namespace BankingMangerB2 {
 			this->button2->UseVisualStyleBackColor = false;
 			this->button2->Click += gcnew System::EventHandler(this, &Home::button2_Click);
 			// 
+			// panel2
+			// 
+			this->panel2->BackColor = System::Drawing::Color::Transparent;
+			this->panel2->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->panel2->Controls->Add(this->button5);
+			this->panel2->Controls->Add(this->panel4);
+			this->panel2->Controls->Add(this->textBox2);
+			this->panel2->Controls->Add(this->panel3);
+			this->panel2->Controls->Add(this->textBox1);
+			this->panel2->Controls->Add(this->label2);
+			this->panel2->Controls->Add(this->label1);
+			this->panel2->Location = System::Drawing::Point(240, 13);
+			this->panel2->Name = L"panel2";
+			this->panel2->Size = System::Drawing::Size(405, 141);
+			this->panel2->TabIndex = 5;
+			// 
+			// button5
+			// 
+			this->button5->BackColor = System::Drawing::Color::Transparent;
+			this->button5->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->button5->Font = (gcnew System::Drawing::Font(L"Segoe UI", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button5->ForeColor = System::Drawing::Color::White;
+			this->button5->Location = System::Drawing::Point(281, 106);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(119, 29);
+			this->button5->TabIndex = 7;
+			this->button5->Text = L"Continue";
+			this->button5->UseVisualStyleBackColor = false;
+			this->button5->Click += gcnew System::EventHandler(this, &Home::button5_Click);
+			// 
+			// panel4
+			// 
+			this->panel4->BackColor = System::Drawing::Color::White;
+			this->panel4->Location = System::Drawing::Point(170, 84);
+			this->panel4->Name = L"panel4";
+			this->panel4->Size = System::Drawing::Size(137, 2);
+			this->panel4->TabIndex = 6;
+			// 
+			// textBox2
+			// 
+			this->textBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(50)),
+				static_cast<System::Int32>(static_cast<System::Byte>(83)));
+			this->textBox2->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->textBox2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBox2->ForeColor = System::Drawing::Color::White;
+			this->textBox2->Location = System::Drawing::Point(172, 60);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(137, 23);
+			this->textBox2->TabIndex = 5;
+			this->textBox2->UseSystemPasswordChar = true;
+			// 
+			// panel3
+			// 
+			this->panel3->BackColor = System::Drawing::Color::White;
+			this->panel3->Location = System::Drawing::Point(170, 45);
+			this->panel3->Name = L"panel3";
+			this->panel3->Size = System::Drawing::Size(137, 2);
+			this->panel3->TabIndex = 6;
+			// 
+			// textBox1
+			// 
+			this->textBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(50)),
+				static_cast<System::Int32>(static_cast<System::Byte>(83)));
+			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->textBox1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->textBox1->ForeColor = System::Drawing::Color::White;
+			this->textBox1->Location = System::Drawing::Point(172, 21);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(137, 23);
+			this->textBox1->TabIndex = 5;
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label2->ForeColor = System::Drawing::Color::White;
+			this->label2->Location = System::Drawing::Point(5, 58);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(161, 25);
+			this->label2->TabIndex = 0;
+			this->label2->Text = L"Account Password:";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->ForeColor = System::Drawing::Color::White;
+			this->label1->Location = System::Drawing::Point(3, 19);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(163, 25);
+			this->label1->TabIndex = 0;
+			this->label1->Text = L"Account username:";
+			// 
 			// Home
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->ClientSize = System::Drawing::Size(1080, 720);
+			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->button1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
@@ -232,6 +356,8 @@ namespace BankingMangerB2 {
 			this->Name = L"Home";
 			this->Text = L"Home";
 			this->panel1->ResumeLayout(false);
+			this->panel2->ResumeLayout(false);
+			this->panel2->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -294,12 +420,66 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 	ACCinfo->password = password;
 	
 	ACCinfo->ShowDialog();
-	ACCinfo->UserIndex = UserIndex;
 
 	if (ACCinfo->boolValue)
 	{
 		this->Show();
 	}
+}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Hide();
+	SearchU^ searchU = gcnew SearchU();
+	searchU->Owner = this;
+	searchU->PopulateListBox1();
+
+	searchU->ShowDialog();
+
+	if (searchU->boolValue)
+	{
+		this->Show();
+	}
+}
+private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e) {
+	panel2->Show();
+}
+private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+	/*msclr::interop::marshal_context context;
+
+	std::string username = context.marshal_as<std::string>(textBox1->Text);
+	std::string userpassword = context.marshal_as<std::string>(textBox2->Text);
+
+	auto currnetUser = userList.head;
+
+	while (currnetUser != nullptr)
+	{
+		if (username == currnetUser->data.getUsername() && userpassword == currnetUser->data.getPassword())
+		{
+			break;
+		}
+
+		currnetUser = currnetUser->next;
+	}
+
+	this->Hide();
+	ChangeInfo^ changeInfo = gcnew ChangeInfo();
+	changeInfo->Owner = this;
+	
+	std::string Username_T = currnetUser->data.getUsername();
+	System::String^ UsernameN = gcnew System::String(Username_T.c_str());
+
+	std::string Password_T = currnetUser->data.getPassword();
+	System::String^ PasswordN = gcnew System::String(Username_T.c_str());
+
+	changeInfo->username = UsernameN;
+	changeInfo->password = PasswordN;
+
+	changeInfo->ShowDialog();
+
+	if (changeInfo->boolValue)
+	{
+		this->Show();
+	}*/
+
 }
 };
 }

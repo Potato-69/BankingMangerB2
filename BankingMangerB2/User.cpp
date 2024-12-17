@@ -4,19 +4,7 @@
 
 using namespace std;
 
-User::User(const UserRole& role, const string& fname, const string& lname,
-    const string& email, string Username, const string& password, const string& phonenum,
-    const string& address, const BankAccount& bankAccount) : role(role) , Fname(fname), Lname(lname), Email(email), 
-    username(Username), Password(password), phonenum(phonenum), address(address), bankAccount(bankAccount)
-{
-}
 
-User::User(const string& username, const string& password,
-    const string& phonenum, const string& address,
-    const BankAccount& bankAccount, const UserRole& role)
-    : username(username), Password(password), phonenum(phonenum),
-    address(address), bankAccount(bankAccount), role(role) {
-}
 
 
 // User initializer 
@@ -25,28 +13,28 @@ int User::nextU_ID = 1;
 
 
 
-User::User(UserRole usrole, const string& fname, const string& lname, const string& email,
-    const string& password, const string& phoneNum, double initBalance, string Username) : Fname(fname), Lname(lname), Email(email), Password(password), role(usrole), phonenum(phoneNum), username(Username) {
-    role = usrole;
-    uID = generateUserID();
-    bankAccount.setBalance(initBalance);
-    bankAccount.setAccountType("customer");
-
+User::User(const UserRole& role, const string& fname, const string& lname,
+    const string& email, string Username, const string& password, const string& phonenum,
+    const string& address, const BankAccount& bankAccount, const string& bankID) : role(role), Fname(fname), Lname(lname), Email(email),
+    username(Username), Password(password), phonenum(phonenum), address(address), bankAccount(bankAccount), BankID (bankID)
+{
+    
 }
+
 
 User::User(const User& other)
     : role(other.role), Fname(other.Fname), Lname(other.Lname), Email(other.Email),
     username(other.username), Password(other.Password), phonenum(other.phonenum),
-    address(other.address), bankAccount(other.bankAccount) {}
+    address(other.address), bankAccount(other.bankAccount), BankID(other.BankID) {}
 
 string User::generateUserID() {
     std::stringstream ss;
-    if (nextU_ID == 1) {
-        cout << "CUSTOMER is " << CUSTOMER << endl;
-        cout << "ADMIN is " << ADMIN << endl;
-    }
+    //if (nextU_ID == 1) {
+    //    cout << "CUSTOMER is " << CUSTOMER << endl;
+    //    cout << "ADMIN is " << ADMIN << endl;
+    //}
 
-    cout << "type is " << role << endl;
+    //cout << "type is " << role << endl;
     //     type = CUSTOMER;
     ss << (role == ADMIN ? "ADM" : "CUS") << std::setfill('0') << std::setw(3) << nextU_ID++;
     return ss.str();
@@ -58,7 +46,7 @@ const string& User::getUsername() const {
 }
 
 void User::setUserId(const std::string& newUserId) {
-    userid = newUserId;
+    uID = newUserId;
 }
 const string& User::getPassword() const {
     return Password;
@@ -92,6 +80,11 @@ const string& User::getUserID() const
     return uID;
 }
 
+string& User::getBankID()
+{
+    return BankID;
+}
+
 BankAccount& User::getBankAccount() {
     return bankAccount;
 }
@@ -117,18 +110,32 @@ void User::setAddress(const string& newAddress) {
     address = newAddress;
 }
 
+void User::setBankID(string& newBankID)
+{
+    BankID = newBankID;
+}
+
 void User::setBankAccount(const BankAccount& newBankAccount) {
     bankAccount = newBankAccount;
 }
 
-void User::setRole(User::UserRole newRole) {
-    role = newRole;
+void User::setFname(const string& newfname)
+{
+    Fname = newfname;
 }
 
-void User::addTransaction(const string& transactionType, double amount)
+void User::setLname(const string& newlname)
 {
-    Transaction newtransacion = Transaction(transactionType, amount);
-    transactions.append(newtransacion);
+    Lname = newlname;
+}
+
+void User::setEmail(const string& newemail)
+{
+    Email = newemail;
+}
+
+void User::setRole(User::UserRole newRole) {
+    role = newRole;
 }
 
 std::string User::serialize() const {
@@ -143,8 +150,9 @@ std::string User::serialize() const {
     return oss.str();
 }
 
-// Old Mothed
-User User::deserialize(const std::string& str) {
+// Deserialization method implementation
+// Old Method
+/*User User::deserialize(const std::string& str) {
     std::istringstream iss(str);
     User user;
     // char comma;
@@ -178,7 +186,7 @@ User User::deserialize(const std::string& str) {
     }
 
     return user;
-}
+}*/
 
 
 std::string User::serializeBankAccount() const {

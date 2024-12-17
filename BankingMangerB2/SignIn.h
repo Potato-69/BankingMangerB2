@@ -196,9 +196,9 @@ namespace BankingMangerB2 {
 			this->button2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 7.8F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->button2->ForeColor = System::Drawing::Color::White;
-			this->button2->Location = System::Drawing::Point(86, 225);
+			this->button2->Location = System::Drawing::Point(96, 225);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(75, 30);
+			this->button2->Size = System::Drawing::Size(87, 30);
 			this->button2->TabIndex = 1;
 			this->button2->Text = L"Register";
 			this->button2->UseVisualStyleBackColor = false;
@@ -214,7 +214,7 @@ namespace BankingMangerB2 {
 			this->button3->ForeColor = System::Drawing::Color::White;
 			this->button3->Location = System::Drawing::Point(3, 225);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(75, 30);
+			this->button3->Size = System::Drawing::Size(87, 30);
 			this->button3->TabIndex = 1;
 			this->button3->Text = L"Sign in";
 			this->button3->UseVisualStyleBackColor = false;
@@ -287,34 +287,6 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 				textBox2->Clear();
 			}
 		}
-		
-		
-
-	
-
-	/*for (int i = 0; i < userList.getSize(); i++) {
-		//if (username == userList.getElementAt(i).getUsername() && userpassword == userList.getElementAt(i).getPassword()) {
-			//UserIN = true;
-			this->Hide();
-			Home^ home = gcnew Home();
-			home->Owner = this;
-			home->UserIndex = i;
-			home->ShowDialog();
-			if (home->boolValue)
-			{
-				this->Show();
-				textBox1->Clear();
-				textBox2->Clear();
-				UserIN = false;
-			}
-		}
-		else
-		{
-			MessageBox::Show("This user doesn't exist", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			return;
-		}
-	}*/
-
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Hide();
