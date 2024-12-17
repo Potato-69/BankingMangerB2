@@ -13,6 +13,7 @@
 #include "RegisterForm.h"
 #include "DisplayInfo.h"
 #include "SearchU.h"
+#include "ChangeInfo.h"
 
 namespace BankingMangerB2 {
 
@@ -443,7 +444,7 @@ private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e
 	panel2->Show();
 }
 private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
-	/*msclr::interop::marshal_context context;
+	msclr::interop::marshal_context context;
 
 	std::string username = context.marshal_as<std::string>(textBox1->Text);
 	std::string userpassword = context.marshal_as<std::string>(textBox2->Text);
@@ -478,7 +479,7 @@ private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e
 	if (changeInfo->boolValue)
 	{
 		this->Show();
-	}*/
+	}
 
 }
 };

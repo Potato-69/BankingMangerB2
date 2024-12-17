@@ -622,6 +622,8 @@ namespace BankingMangerB2 {
 				return;
 			}
 
+			userList.append(newUser_A);
+
 		}
 		else
 		{

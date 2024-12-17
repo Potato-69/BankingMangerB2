@@ -12,6 +12,7 @@
 #include "User.h"
 #include "BankAccount.h"
 #include "Transaction.h"
+#include "DisplayInfo.h"
 
 namespace BankingMangerB2 {
 
@@ -268,7 +269,7 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 			currnetUser = currnetUser->next;
 		}
 		
-		if (UserIN)
+		if (UserIN && currnetUser->data.getRole() == User::ADMIN)
 		{
 			this->Hide();
 			Home^ home = gcnew Home();
@@ -280,6 +281,26 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 			home->ShowDialog();
 
 			if (home->boolValue)
+			{
+				this->Show();
+				UserIN = false;
+				textBox1->Clear();
+				textBox2->Clear();
+			}
+
+		}
+		else if (UserIN)
+		{
+			this->Hide();
+			DisplayInfo^ displayInfo = gcnew DisplayInfo();
+
+			displayInfo->username = textBox1->Text;
+			displayInfo->password = textBox2->Text;
+
+			displayInfo->Owner = this;
+			displayInfo->ShowDialog();
+
+			if (displayInfo->boolValue)
 			{
 				this->Show();
 				UserIN = false;
